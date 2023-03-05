@@ -1,0 +1,10 @@
+gov\iti\jets\healthifyme\models\Order.class
+gov\iti\jets\healthifyme\models\OrderHasProductId.class
+gov\iti\jets\healthifyme\models\OrderId.class
+gov\iti\jets\healthifyme\models\Roles.class
+gov\iti\jets\healthifyme\models\Product.class
+gov\iti\jets\healthifyme\models\ProductId.class
+gov\iti\jets\healthifyme\HealthifyMeApplication.class
+gov\iti\jets\healthifyme\models\User.class
+gov\iti\jets\healthifyme\models\OrderHasProduct.class
+gov\iti\jets\healthifyme\models\Category.class
