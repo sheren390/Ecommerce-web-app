@@ -1,0 +1,26 @@
+
+
+# get all users
+GET http://localhost:8080/api/test/users HTTP/1.1
+Accept: */*
+Content-Type: */*
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiaWF0IjoxNjc4MTk3MjA5LCJleHAiOjE2NzgyODM2MDl9.AhxWANkHR8idRj4IcUfFTGt-OWfykrQKc8R9xz6NIZs2k4QnxFI7uZL1xBy005R9AsSnqFYfYiWyH6vDSaBD2Q
+
+###
+
+POST http://localhost:8080/api/test/users HTTP/1.1
+Accept: */*
+Content-Type: */*
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiaWF0IjoxNjc4MTk3MjA5LCJleHAiOjE2NzgyODM2MDl9.AhxWANkHR8idRj4IcUfFTGt-OWfykrQKc8R9xz6NIZs2k4QnxFI7uZL1xBy005R9AsSnqFYfYiWyH6vDSaBD2Q
+
+
+###
+POST http://localhost:3000/api/auth/signup HTTP/1.1
+
+{
+    "username":"test1",
+    "email":"test1@gmail.com",
+    "password":"123456",
+    "role":["user","admin"]
+}
+
