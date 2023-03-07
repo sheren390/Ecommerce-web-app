@@ -1,4 +1,4 @@
-package gov.iti.jets.ecommiti;
+package gov.iti.jets.ecommiti.mappers;
 
 import gov.iti.jets.ecommiti.dtos.ProductDTO;
 import gov.iti.jets.ecommiti.models.Product;
