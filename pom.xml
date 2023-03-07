@@ -116,11 +116,11 @@
                             <version>0.2.0</version>
                         </dependency>
                     </annotationProcessorPaths>
-                    <!-- <compilerArgs>
+                    <compilerArgs>
                         <compilerArg>
                             -Amapstruct.defaultComponentModel=spring
                         </compilerArg>
-                    </compilerArgs> -->
+                    </compilerArgs>
                 </configuration>
             </plugin>
         </plugins>
