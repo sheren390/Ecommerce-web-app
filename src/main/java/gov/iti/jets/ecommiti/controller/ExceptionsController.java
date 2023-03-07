@@ -6,13 +6,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import gov.iti.jets.ecommiti.exception.CustomException;
 import gov.iti.jets.ecommiti.models.ErrorDetails;
 
 @ControllerAdvice
 public class ExceptionsController {
 
     @ExceptionHandler
-    public ResponseEntity<ErrorDetails> handleExceptions(Exception e) {
+    public ResponseEntity<?> handleExceptions(Exception e) {
         ErrorDetails errorDetails = new ErrorDetails();
         errorDetails.setErrorMessage(e.getMessage());
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import gov.iti.jets.ecommiti.exception.CategoryEmptyNameException;
 import gov.iti.jets.ecommiti.exception.CategoryNotFoundExceptions;
 import gov.iti.jets.ecommiti.models.Category;
 import gov.iti.jets.ecommiti.repositories.CategoryRepository;
@@ -23,6 +24,22 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Category getByID(Integer id) {
         return categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundExceptions());
+    }
+
+    @Override
+    public Category getByName(String name) {
+        return categoryRepository.findByName(name).orElseThrow(() -> new CategoryNotFoundExceptions());
+    }
+
+    @Override
+    public Category create(Category category) {
+        Category c ;
+        try {
+            c = categoryRepository.save(category);
+        } catch (Exception e) {
+           throw new CategoryEmptyNameException();
+        }
+        return c;
     }
 
 }
