@@ -1,0 +1,50 @@
+
+
+
+###
+# get all users
+GET http://localhost:8080/api/test/users HTTP/1.1
+Accept: */*
+Content-Type: */*
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiaWF0IjoxNjc4MzExNzUzLCJleHAiOjE2NzgzOTgxNTN9.9zDs4sienZ0qevCJKN3sy7IZ2eKwJXzlZi00SejOwPm5h-2QIwnY2bzVU0O7MePbIjfm4KAffpTB0V6cSzo2aQ
+
+###
+# add category
+POST http://localhost:8080/api/test/categories HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiaWF0IjoxNjc4MzExNzUzLCJleHAiOjE2NzgzOTgxNTN9.9zDs4sienZ0qevCJKN3sy7IZ2eKwJXzlZi00SejOwPm5h-2QIwnY2bzVU0O7MePbIjfm4KAffpTB0V6cSzo2aQ
+
+{
+  
+   "name" : "cat1",
+   "image": null,
+    "description":"Televisions"
+}
+###
+# get all categories
+GET http://localhost:8080/api/test/categories HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiaWF0IjoxNjc4MzExNzUzLCJleHAiOjE2NzgzOTgxNTN9.9zDs4sienZ0qevCJKN3sy7IZ2eKwJXzlZi00SejOwPm5h-2QIwnY2bzVU0O7MePbIjfm4KAffpTB0V6cSzo2aQ
+###
+# register user
+POST http://localhost:8080/api/auth/signup HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+{
+    "username":"test1",
+    "email":"test1@gmail.com",
+    "password":"123456",
+    "role":["user","admin"]
+}
+
+###
+POST http://localhost:8080/api/auth/signin HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+
+{
+    "username":"test",
+    "password":"123456",
+}
