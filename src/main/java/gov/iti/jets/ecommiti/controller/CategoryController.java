@@ -3,6 +3,7 @@ package gov.iti.jets.ecommiti.controller;
 import java.util.List;
 
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,12 +18,13 @@ import gov.iti.jets.ecommiti.services.CategoryServiceImpl;
 import jakarta.websocket.server.PathParam;
 import lombok.Data;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @Data
 @RequestMapping("/api/test/categories")
-@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+// @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 
 public class CategoryController {
 
@@ -50,4 +52,16 @@ public class CategoryController {
         return CategoryMapper.INSTANCE.map(categoryServiceImpl.create(category));
     }
 
+    @PutMapping("/{id}")
+    public CategoryResponseDto update(@PathVariable int id, @RequestBody Category category) {
+        category.setId(id);
+        return CategoryMapper.INSTANCE.map(categoryServiceImpl.update(id, category));
+    }
+
+    // TODO : use product repo to get all products with
+    // certain category
+    @DeleteMapping("/{id}")
+    public int delete(@PathVariable int id) {
+        return categoryServiceImpl.delete(id);
+    }
 }

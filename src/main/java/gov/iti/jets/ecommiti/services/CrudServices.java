@@ -12,7 +12,9 @@ public interface CrudServices<T, ID> {
     public T getByName(String name);
 
     public T create(T object);
-    // public T update(ID id ,T object);
-    // public void delete(ID id);
+
+    public T update(ID id, T object);
+
+    public int delete(ID id);
 
 }

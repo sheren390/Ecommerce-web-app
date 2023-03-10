@@ -12,5 +12,6 @@ public class CategoryResponseDto {
     private String name;
     private String image;
     private String description;
+    // TODO waiting product dto
     // private Set<Product> products = new HashSet<Product>(0);
 }

@@ -16,6 +16,7 @@ public class ExceptionsController {
     public ResponseEntity<?> handleExceptions(Exception e) {
         ErrorDetails errorDetails = new ErrorDetails();
         errorDetails.setErrorMessage(e.getMessage());
+        errorDetails.setErrorCode("404");
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
 }

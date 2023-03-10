@@ -33,13 +33,26 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category create(Category category) {
-        Category c ;
+        Category c;
         try {
             c = categoryRepository.save(category);
         } catch (Exception e) {
-           throw new CategoryEmptyNameException();
+            throw new CategoryEmptyNameException();
         }
         return c;
+    }
+
+    @Override
+    public Category update(Integer id, Category object) {
+
+        return categoryRepository.save(object);
+    }
+
+    @Override
+    public int delete(Integer id) {
+        int number = categoryRepository.softDeleteCategoryById(id);
+        categoryRepository.deleteById(id);
+        return number;
     }
 
 }
