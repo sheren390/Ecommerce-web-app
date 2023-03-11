@@ -32,6 +32,7 @@ public class Product implements java.io.Serializable {
     private int quantity;
     private long price;
     private String image;
+    private Boolean isDeleted;
     private Set<OrderHasProduct> orderHasProducts = new HashSet<OrderHasProduct>(0);
 
     public Product() {
@@ -133,6 +134,15 @@ public class Product implements java.io.Serializable {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public Boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
     public Set<OrderHasProduct> getOrderHasProducts() {

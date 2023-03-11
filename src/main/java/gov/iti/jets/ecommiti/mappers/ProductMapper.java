@@ -1,6 +1,7 @@
 package gov.iti.jets.ecommiti.mappers;
 
 import gov.iti.jets.ecommiti.dtos.ProductDTO;
+import gov.iti.jets.ecommiti.dtos.request.ProductDto;
 import gov.iti.jets.ecommiti.models.Product;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -10,9 +11,12 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ProductMapper {
-    ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
 
-    @Mapping(target = "name", source = "name")
-    List<ProductDTO> map(List<Product> product);
+    ProductMapper productMapper = Mappers.getMapper(ProductMapper.class);
+
+    Product mapToProduct(ProductDto productRequestDto);
+    ProductDto mapToProductDto(Product product);
+    List <Product> mapToProduct(List<ProductDto> productRequestDto);
+    List <ProductDto> mapToProductDto(List<Product> product);
 
 }
