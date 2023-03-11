@@ -1,0 +1,14 @@
+package gov.iti.jets.ecommiti.mappers;
+
+import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
+@Mapper(componentModel = "spring")
+public interface UserMapper {
+    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
+    
+    //toEntity
+    @Mapping(target = "id", ignore = true)
+    User toUser(UserDTO userDTO);
+    
+    OrderDTO toUserDto(User user);
+}
