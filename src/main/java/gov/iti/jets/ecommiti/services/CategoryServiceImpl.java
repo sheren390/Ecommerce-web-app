@@ -4,55 +4,65 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import gov.iti.jets.ecommiti.dtos.response.CategoryResponseDto;
 import gov.iti.jets.ecommiti.exception.CategoryEmptyNameException;
 import gov.iti.jets.ecommiti.exception.CategoryNotFoundExceptions;
+import gov.iti.jets.ecommiti.mappers.CategoryMapper;
 import gov.iti.jets.ecommiti.models.Category;
+import gov.iti.jets.ecommiti.models.ResponseViewModel;
 import gov.iti.jets.ecommiti.repositories.CategoryRepository;
 import lombok.Data;
 
 @Service
 @Data
-public class CategoryServiceImpl implements CategoryService {
+public class CategoryServiceImpl {
 
     private final CategoryRepository categoryRepository;
 
-    @Override
-    public List<Category> getAll() {
-        return categoryRepository.findAll();
+    public ResponseViewModel<List<CategoryResponseDto>> getAll() {
+        ResponseViewModel<List<CategoryResponseDto>> responseViewModel = new ResponseViewModel<>();
+        responseViewModel.setData(CategoryMapper.INSTANCE.map(categoryRepository.findAll()));
+        return responseViewModel;
     }
 
-    @Override
-    public Category getByID(Integer id) {
-        return categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundExceptions());
+    public ResponseViewModel<CategoryResponseDto> getByID(Integer id) {
+        ResponseViewModel<CategoryResponseDto> responseViewModel = new ResponseViewModel<>();
+        responseViewModel.setData(CategoryMapper.INSTANCE
+                .map(categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundExceptions())));
+        return responseViewModel;
     }
 
-    @Override
-    public Category getByName(String name) {
-        return categoryRepository.findByName(name).orElseThrow(() -> new CategoryNotFoundExceptions());
+    public ResponseViewModel<CategoryResponseDto> getByName(String name) {
+        ResponseViewModel<CategoryResponseDto> responseViewModel = new ResponseViewModel<>();
+        responseViewModel.setData(CategoryMapper.INSTANCE
+                .map(categoryRepository.findByName(name).orElseThrow(() -> new CategoryNotFoundExceptions())));
+        return responseViewModel;
     }
 
-    @Override
-    public Category create(Category category) {
+    public ResponseViewModel<CategoryResponseDto> create(Category category) {
         Category c;
+        ResponseViewModel<CategoryResponseDto> responseViewModel = new ResponseViewModel<>();
         try {
             c = categoryRepository.save(category);
         } catch (Exception e) {
             throw new CategoryEmptyNameException();
         }
-        return c;
+        responseViewModel.setData(CategoryMapper.INSTANCE.map(c));
+        return responseViewModel;
     }
 
-    @Override
-    public Category update(Integer id, Category object) {
-
-        return categoryRepository.save(object);
+    public ResponseViewModel<CategoryResponseDto> update(Integer id, Category object) {
+        ResponseViewModel<CategoryResponseDto> responseViewModel = new ResponseViewModel<>();
+        responseViewModel.setData(CategoryMapper.INSTANCE.map(categoryRepository.save(object)));
+        return responseViewModel;
     }
 
-    @Override
-    public int delete(Integer id) {
-        int number = categoryRepository.softDeleteCategoryById(id);
+    public ResponseViewModel<Integer> delete(Integer id) {
+        categoryRepository.softDeleteCategoryById(id);
         categoryRepository.deleteById(id);
-        return number;
+        ResponseViewModel<Integer> responseViewModel = new ResponseViewModel<>();
+        responseViewModel.setMessage("Category deleted");
+        return responseViewModel;
     }
 
 }

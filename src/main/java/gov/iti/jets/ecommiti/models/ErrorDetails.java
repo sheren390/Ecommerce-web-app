@@ -8,8 +8,7 @@ import lombok.Data;
 @Data
 public class ErrorDetails {
 
-        private String errorCode;
-        private String errorMessage;
-        // private Map<String, Object> additionalData = new HashMap<>();
+        private String status;
+        private String message;
 
 }
