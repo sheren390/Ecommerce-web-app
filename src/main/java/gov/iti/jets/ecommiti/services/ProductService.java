@@ -4,80 +4,89 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-
 import org.springframework.stereotype.Service;
 
 import gov.iti.jets.ecommiti.exception.ProductNotFoundException;
 import gov.iti.jets.ecommiti.mappers.ProductMapper;
 import gov.iti.jets.ecommiti.models.Product;
+import gov.iti.jets.ecommiti.models.ResponseViewModel;
 import gov.iti.jets.ecommiti.dtos.request.ProductDto;
 import gov.iti.jets.ecommiti.repositories.ProductRepository;
-
 
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
 
-    public ProductService(ProductRepository productRepository)
-    {
-        this.productRepository=productRepository;
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 
-    public List<ProductDto> getAllproducts() {
-        List <Product> products =productRepository.findAll();
-        return ProductMapper.productMapper.mapToProductDto(products);   
-     }
+    public ResponseViewModel getAllproducts() {
+        ResponseViewModel responseViewModel = new ResponseViewModel();
+        List<Product> products = productRepository.findAll();
+        responseViewModel.setData(ProductMapper.productMapper.mapToProductDto(products));
+        return responseViewModel;
+    }
 
-     public List<ProductDto> getproducts() {
-    
-        List <Product> products =productRepository.findAll();
-        Predicate<Product> isDeleted= product -> product.getIsDeleted()==false;
-        products=products.stream().filter(isDeleted).collect(Collectors.toList());
-        return ProductMapper.productMapper.mapToProductDto(products);   
-     }
+    public ResponseViewModel getproducts() {
+        ResponseViewModel responseViewModel = new ResponseViewModel();
+        List<Product> products = productRepository.findAll();
+        Predicate<Product> isDeleted = product -> product.getIsDeleted() == false;
+        products = products.stream().filter(isDeleted).collect(Collectors.toList());
+        responseViewModel.setData(ProductMapper.productMapper.mapToProductDto(products));
+        return responseViewModel;
+    }
 
-    public ProductDto getProductById(int id) 
-    {
-        Product product =productRepository.findById(id).orElseThrow(()->new ProductNotFoundException());
-        if(product.getIsDeleted()==true)
-        {
-           throw new ProductNotFoundException();
+    public ResponseViewModel getProductById(int id) {
+        ResponseViewModel responseViewModel = new ResponseViewModel();
+
+        Product product = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException());
+        if (product.getIsDeleted() == true) {
+            throw new ProductNotFoundException();
         }
-        return ProductMapper.productMapper.mapToProductDto(product); 
+        responseViewModel.setData(ProductMapper.productMapper.mapToProductDto(product));
+        return responseViewModel;
     }
 
-    public Product createProuduct(ProductDto productDto)
-    {
+    public ResponseViewModel createProuduct(ProductDto productDto) {
+        ResponseViewModel responseViewModel = new ResponseViewModel();
+
         Product product = ProductMapper.productMapper.mapToProduct(productDto);
         productRepository.save(product);
-        return product;
+        responseViewModel.setData(product);
+        return responseViewModel;
     }
-    public ProductDto deleteProuduct(int id)
-    {
-        Product product =productRepository.findById(id).orElseThrow(()->new ProductNotFoundException());
+
+    public ResponseViewModel deleteProuduct(int id) {
+        ResponseViewModel responseViewModel = new ResponseViewModel();
+
+        Product product = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException());
         product.setIsDeleted(Boolean.TRUE);
-        return ProductMapper.productMapper.mapToProductDto(productRepository.save(product)); 
-       }
-
-       public void remove(int id)
-       {
-        productRepository.deleteById(id);
-       }
-
-    public ProductDto updateProuduct(int id,ProductDto productDto)
-    {
-        productDto.setId(id);
-        return ProductMapper.productMapper.mapToProductDto(productRepository.save(ProductMapper.productMapper.mapToProduct(productDto)));
+        responseViewModel.setData(ProductMapper.productMapper.mapToProductDto(productRepository.save(product)));
+        return responseViewModel;
     }
 
-    public List<ProductDto> getProductByName(String name)
-     {
-        List<Product> products =productRepository.findByName(name);
-       Predicate<Product> isDeleted = product -> product.getIsDeleted()==false;
-       products=products.stream().filter(isDeleted).collect(Collectors.toList());
-       return ProductMapper.productMapper.mapToProductDto(products);   
-     }
-  
+    public void remove(int id) {
+        productRepository.deleteById(id);
+    }
 
-    
+    public ResponseViewModel updateProuduct(int id, ProductDto productDto) {
+        ResponseViewModel responseViewModel = new ResponseViewModel();
+
+        productDto.setId(id);
+        responseViewModel.setData(ProductMapper.productMapper
+        .mapToProductDto(productRepository.save(ProductMapper.productMapper.mapToProduct(productDto))));
+        return responseViewModel;
+    }
+
+    public ResponseViewModel getProductByName(String name) {
+        ResponseViewModel responseViewModel = new ResponseViewModel();
+
+        List<Product> products = productRepository.findByName(name);
+        Predicate<Product> isDeleted = product -> product.getIsDeleted() == false;
+        products = products.stream().filter(isDeleted).collect(Collectors.toList());
+        responseViewModel.setData(ProductMapper.productMapper.mapToProductDto(products));
+        return responseViewModel;
+    }
+
 }
