@@ -32,33 +32,33 @@ public class CategoryController {
     private final CategoryServiceImpl categoryServiceImpl;
 
     @GetMapping
-    ResponseViewModel<List<CategoryResponseDto>> getAll() {
+    ResponseViewModel getAll() {
         return categoryServiceImpl.getAll();
     }
 
     @GetMapping("/{id}")
-    ResponseViewModel<CategoryResponseDto> getByID(@PathVariable int id) {
+    ResponseViewModel getByID(@PathVariable int id) {
         return categoryServiceImpl.getByID(id);
     }
 
     @GetMapping("/name")
-    ResponseViewModel<CategoryResponseDto> getByName(@RequestParam String name) {
+    ResponseViewModel getByName(@RequestParam String name) {
         return categoryServiceImpl.getByName(name);
     }
 
     @PostMapping
-    public ResponseViewModel<CategoryResponseDto> add(@RequestBody Category category) {
+    public ResponseViewModel add(@RequestBody Category category) {
         return categoryServiceImpl.create(category);
     }
 
     @PutMapping("/{id}")
-    public ResponseViewModel<CategoryResponseDto> update(@PathVariable int id, @RequestBody Category category) {
+    public ResponseViewModel update(@PathVariable int id, @RequestBody Category category) {
         category.setId(id);
         return categoryServiceImpl.update(id, category);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseViewModel<Integer> delete(@PathVariable int id) {
+    public ResponseViewModel delete(@PathVariable int id) {
         return categoryServiceImpl.delete(id);
     }
 }

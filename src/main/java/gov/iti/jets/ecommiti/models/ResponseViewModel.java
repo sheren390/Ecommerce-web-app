@@ -6,9 +6,9 @@ import lombok.Data;
 
 @Data
 @Component
-public class ResponseViewModel<T> {
+public class ResponseViewModel {
 
-    T data;
-    String status = "sucess";
+    Object data;
+    boolean status = true;
     String message = "";
 }

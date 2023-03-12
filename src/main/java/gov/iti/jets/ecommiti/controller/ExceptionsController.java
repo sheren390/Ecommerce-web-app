@@ -14,7 +14,6 @@ public class ExceptionsController {
     @ExceptionHandler
     public ResponseEntity<ErrorDetails> handleExceptions(Exception e) {
         ErrorDetails errorDetails = new ErrorDetails();
-        errorDetails.setStatus("failed");
         errorDetails.setMessage(e.getMessage());
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
