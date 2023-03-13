@@ -55,7 +55,7 @@ public class UserService {
 
     public ResponseViewModel getuserById(Integer id) {
         ResponseViewModel responseViewModel = new ResponseViewModel();
-        responseViewModel.setData(userRepository.findById(id).get()); 
+        responseViewModel.setData(UserMapper.INSTANCE.map(userRepository.findById(id).get())); 
         return responseViewModel;
     }
 

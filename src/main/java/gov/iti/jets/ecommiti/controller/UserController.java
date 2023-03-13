@@ -25,18 +25,16 @@ public class UserController {
     @Autowired
     UserService userService;
 
-   
-//    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseViewModel getAll(){
+    // @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping
+    public ResponseViewModel getAll() {
         return userService.getAll();
     }
-    
+
     @GetMapping("/{id}")
-    public ResponseViewModel getUserById(@PathVariable("id") Integer id)
-    {
+    public ResponseViewModel getUserById(@PathVariable("id") Integer id) {
         return userService.getuserById(id);
     }
-
 
     @PutMapping("/{id}")
     public User updateUser(@PathVariable("id") Integer id, @RequestBody User user) {
