@@ -1,5 +1,6 @@
 package gov.iti.jets.ecommiti.dtos.request;
 
+import gov.iti.jets.ecommiti.dtos.response.CategoryResponseDto;
 import lombok.Data;
 
 @Data
@@ -11,7 +12,7 @@ public class ProductDto {
     private int quantity;
     private long price;
     private String image;
-    private CategoryRequestDto category;
+    private CategoryResponseDto category;
         // private User user;
 
 }
