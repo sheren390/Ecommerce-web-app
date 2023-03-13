@@ -1,5 +1,8 @@
 package gov.iti.jets.ecommiti.services;
 
+import gov.iti.jets.ecommiti.mappers.CategoryMapper;
+import gov.iti.jets.ecommiti.mappers.UserMapper;
+import gov.iti.jets.ecommiti.models.ResponseViewModel;
 import gov.iti.jets.ecommiti.models.User;
 import gov.iti.jets.ecommiti.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +17,11 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<User> getAll() {
-        return userRepository.findAll();
+    public ResponseViewModel getAll() {
+        ResponseViewModel responseViewModel = new ResponseViewModel();
+        responseViewModel.setData(UserMapper.INSTANCE.map(userRepository.findAll()));
+        return responseViewModel;
+//        return userRepository.findAll();
     }
 
     public User add(User user){
@@ -45,6 +51,12 @@ public class UserService {
         updatedUser.setProducts(user.getProducts());
         updatedUser.setOrders(user.getOrders());
         return userRepository.save(updatedUser);
+    }
+
+    public ResponseViewModel getuserById(Integer id) {
+        ResponseViewModel responseViewModel = new ResponseViewModel();
+        responseViewModel.setData(userRepository.findById(id).get()); 
+        return responseViewModel;
     }
 
 }
