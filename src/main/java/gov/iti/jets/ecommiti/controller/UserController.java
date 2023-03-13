@@ -1,5 +1,6 @@
 package gov.iti.jets.ecommiti.controller;
 
+import gov.iti.jets.ecommiti.models.ResponseViewModel;
 import gov.iti.jets.ecommiti.models.User;
 import gov.iti.jets.ecommiti.repositories.UserRepository;
 import gov.iti.jets.ecommiti.services.UserService;
@@ -18,16 +19,21 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/test")
+@RequestMapping("/api/test/users")
 // @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-public class UserConttroller {
+public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/users")
-//    @PreAuthorize("hasRole('ADMIN')")
-    public List<User> getAll(){
+    // @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping
+    public ResponseViewModel getAll() {
         return userService.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseViewModel getUserById(@PathVariable("id") Integer id) {
+        return userService.getuserById(id);
     }
 
     @PutMapping("/{id}")

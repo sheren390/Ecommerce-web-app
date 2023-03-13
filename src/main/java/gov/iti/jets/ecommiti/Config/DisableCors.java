@@ -17,7 +17,7 @@ public class DisableCors {
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**").allowedOrigins("http://localhost:4200/").allowedHeaders("*")
 						.allowedMethods("GET", "POST", "PUT", "DELETE");
-				
+
 			}
 		};
 	}
