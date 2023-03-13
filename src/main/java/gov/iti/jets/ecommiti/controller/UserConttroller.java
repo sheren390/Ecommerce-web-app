@@ -1,5 +1,6 @@
 package gov.iti.jets.ecommiti.controller;
 
+import gov.iti.jets.ecommiti.models.ResponseViewModel;
 import gov.iti.jets.ecommiti.models.User;
 import gov.iti.jets.ecommiti.repositories.UserRepository;
 import gov.iti.jets.ecommiti.services.UserService;
@@ -26,7 +27,7 @@ public class UserConttroller {
 
     @GetMapping("/users")
 //    @PreAuthorize("hasRole('ADMIN')")
-    public List<User> getAll(){
+    public ResponseViewModel getAll(){
         return userService.getAll();
     }
 
