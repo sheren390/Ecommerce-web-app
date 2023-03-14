@@ -1,10 +1,8 @@
 package gov.iti.jets.ecommiti.mappers;
 
-import gov.iti.jets.ecommiti.dtos.ProductDTO;
 import gov.iti.jets.ecommiti.dtos.request.ProductDto;
 import gov.iti.jets.ecommiti.models.Product;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;

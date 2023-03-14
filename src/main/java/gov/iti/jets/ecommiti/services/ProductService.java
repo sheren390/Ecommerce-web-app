@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import gov.iti.jets.ecommiti.models.Category;
 import org.springframework.stereotype.Service;
 
 import gov.iti.jets.ecommiti.exception.ProductNotFoundException;
@@ -24,6 +25,13 @@ public class ProductService {
     public ResponseViewModel getAllproducts() {
         ResponseViewModel responseViewModel = new ResponseViewModel();
         List<Product> products = productRepository.findAll();
+        responseViewModel.setData(ProductMapper.productMapper.mapToProductDto(products));
+        return responseViewModel;
+    }
+
+    public ResponseViewModel getProductsByCategory(int id){
+        ResponseViewModel responseViewModel= new ResponseViewModel();
+        List<Product> products = productRepository.findProductsByCategory(id);
         responseViewModel.setData(ProductMapper.productMapper.mapToProductDto(products));
         return responseViewModel;
     }
