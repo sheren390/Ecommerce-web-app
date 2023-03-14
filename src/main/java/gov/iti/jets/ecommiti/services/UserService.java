@@ -34,23 +34,25 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public User updateUser(Integer id, User user) {
+    public ResponseViewModel updateUser(Integer id, User user) {
+        ResponseViewModel responseViewModel = new ResponseViewModel();
         Optional<User> existingUser = userRepository.findById(id);
 
         // if (existingUser.isEmpty()) {
         //     throw new ResourceNotFoundException("User", "id", id);
         // }
-
         User updatedUser = existingUser.get();
         updatedUser.setUsername(user.getUsername());
         updatedUser.setPhone(user.getPhone());
         updatedUser.setEmail(user.getEmail());
-        updatedUser.setPassword(user.getPassword());
         updatedUser.setWalletBalance(user.getWalletBalance());
         updatedUser.setAddress(user.getAddress());
         updatedUser.setProducts(user.getProducts());
         updatedUser.setOrders(user.getOrders());
-        return userRepository.save(updatedUser);
+        responseViewModel.setData(UserMapper.INSTANCE.map(userRepository.save(updatedUser)));
+
+        return responseViewModel;
+
     }
 
     public ResponseViewModel getuserById(Integer id) {
