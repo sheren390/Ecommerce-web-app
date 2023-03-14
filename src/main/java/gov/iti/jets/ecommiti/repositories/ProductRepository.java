@@ -13,12 +13,14 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
-    List<Product> findByName(String name);
+
+    @Query(value = "SELECT * FROM product WHERE name LIKE %:name%", nativeQuery = true)
+    List<Product> findByName(@Param("name") String name);
 
     @Modifying
     @Transactional
     @Query("select p from Product p where p.category.id = :id")
 
-//    int softDeleteCategoryById(@Param("id") Integer id);
+    // int softDeleteCategoryById(@Param("id") Integer id);
     List<Product> findProductsByCategory(@Param("id") Integer id);
 }
