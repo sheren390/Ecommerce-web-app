@@ -31,6 +31,11 @@ public class ProductController {
         return productService.getProductById(id);
     }
 
+    @GetMapping("category/{id}")
+    public ResponseViewModel getProductByCategory(@PathVariable int id) {
+        return productService.getProductsByCategory(id);
+    }
+
     @GetMapping("/name/{name}")
     public ResponseViewModel getProductByName(@PathVariable String name) {
         return productService.getProductByName(name);
