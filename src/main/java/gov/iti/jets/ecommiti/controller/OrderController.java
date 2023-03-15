@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import gov.iti.jets.ecommiti.dtos.OrderDTO;
 import gov.iti.jets.ecommiti.dtos.request.OrderRequestDTO;
+import gov.iti.jets.ecommiti.dtos.response.OrderResponseDTO;
 import gov.iti.jets.ecommiti.models.Order;
 import gov.iti.jets.ecommiti.services.OrderService;
 
@@ -29,6 +30,12 @@ public class OrderController {
     public List<OrderDTO> getAllOrders() {
         
         return orderService.getAllOrders();
+    }
+    
+    @GetMapping("/user/{id}")
+    public List<OrderResponseDTO> getAllOrdersByUserId(@PathVariable Integer id) {
+    
+        return orderService.getAllOrdersByUserId(id);
     }
 
     @GetMapping("/{id}")
