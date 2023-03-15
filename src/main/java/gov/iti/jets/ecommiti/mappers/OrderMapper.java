@@ -26,7 +26,7 @@ public interface OrderMapper {
     OrderDTO toOrderDto(Order order);
 
     @InheritInverseConfiguration
-    List<OrderDTO> toOrderDto(List<Order> orders);
+    List<OrderResponseDTO> toOrderDto(List<Order> orders);
 
     @InheritInverseConfiguration
     List<OrderResponseDTO> map(List<Order> orders);

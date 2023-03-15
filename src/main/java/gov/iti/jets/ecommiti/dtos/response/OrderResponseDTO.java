@@ -12,6 +12,7 @@ import lombok.Data;
 @Data
 public class OrderResponseDTO {
     private Integer id;
+    private UserDTO user;
     private Date date;
     private long totalPrice;
     private String orderStatus;
