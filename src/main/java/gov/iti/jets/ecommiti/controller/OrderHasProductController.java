@@ -16,6 +16,7 @@ import gov.iti.jets.ecommiti.mappers.OrderHasProductMapper;
 import gov.iti.jets.ecommiti.models.OrderHasProduct;
 import gov.iti.jets.ecommiti.models.OrderHasProductId;
 import gov.iti.jets.ecommiti.repositories.OrderHasProductRepository;
+import jakarta.transaction.Transactional;
 import gov.iti.jets.ecommiti.services.OrderHasProductService;
 
 import org.springframework.web.bind.annotation.RequestMapping;

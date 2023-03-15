@@ -23,4 +23,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Transactional
     @Query("select p from Product p where p.category.id = :id")
     List<Product> findProductsByCategory(@Param("id") Integer id);
+
+//    int softDeleteCategoryById(@Param("id") Integer id);
+
+
 }
