@@ -16,7 +16,7 @@ public class OrderRequestDTO {
     private long totalPrice;
     private String orderStatus;
    
-   
-    private Set<OrderHasProduct>orderHasProducts = new HashSet<>();
+    
+    // private Set<OrderHasProduct>orderHasProducts = new HashSet<>();
 
 }

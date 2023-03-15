@@ -1,8 +1,10 @@
 package gov.iti.jets.ecommiti.repositories;
 
+import gov.iti.jets.ecommiti.models.Category;
 import gov.iti.jets.ecommiti.models.Product;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -11,9 +13,11 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
+    List<Product> findByName(String name);
 
-    @Query(value = "SELECT * FROM product WHERE name LIKE %:name%", nativeQuery = true)
-    List<Product> findByName(@Param("name") String name);
+    
+
+    // int softDeleteCategoryById(@Param("id") Integer id);
 
     @Modifying
     @Transactional

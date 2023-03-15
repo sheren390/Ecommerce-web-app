@@ -29,42 +29,35 @@ public class OrderService {
     @Autowired
     private OrderMapper orderMapper;
 
-    public List<OrderDTO> getAllOrders() {
-       List<Order> orders = orderRepository.findAll();
+    public List<OrderResponseDTO> getAllOrders() {
+        List<Order> orders = orderRepository.findAll();
         return orderMapper.toOrderDto(orders);
-     }
+    }
 
-     public OrderDTO getOrderById(Integer id) {
-         Order order =  orderRepository.findById(id)
-            .orElseThrow(() -> new OrderException(HttpStatus.NOT_FOUND, "Order not found with id " + id));
-        
+    public OrderDTO getOrderById(Integer id) {
+        Order order = orderRepository.findById(id)
+                .orElseThrow(() -> new OrderException(HttpStatus.NOT_FOUND, "Order not found with id " + id));
+
         return orderMapper.toOrderDto(order);
 
     }
 
     public OrderDTO updateOrder(Integer id, OrderRequestDTO orderDTO) {
         orderDTO.setId(id);
-        
+
         return orderMapper.toOrderDto(orderRepository.save(orderMapper.toOrder(orderDTO)));
     }
 
     public OrderDTO createOrder(OrderDTO orderDTO) {
-        Long total = (long)0.0;
-        for (OrderHasProduct product : orderDTO.getOrderHasProducts()) {
-            Product p =product.getProduct();
-            total += p.getPrice();
-        }
-        orderDTO.setTotalPrice(total);
         Order order = orderMapper.toOrder(orderDTO);
-        order.setOrderStatus("waiting");
         Order savedOrder = orderRepository.save(order);
 
         return orderMapper.toOrderDto(savedOrder);
     }
 
     public void deleteOrder(Integer id) {
-        Order order =  orderRepository.findById(id)
-        .orElseThrow(() -> new OrderException(HttpStatus.NOT_FOUND, "Order not found with id " + id));
+        Order order = orderRepository.findById(id)
+                .orElseThrow(() -> new OrderException(HttpStatus.NOT_FOUND, "Order not found with id " + id));
 
         order.setOrderStatus("Canceled");
         orderRepository.save(order);
