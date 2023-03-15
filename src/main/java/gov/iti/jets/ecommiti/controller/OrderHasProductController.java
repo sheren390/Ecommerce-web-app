@@ -1,6 +1,10 @@
 package gov.iti.jets.ecommiti.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +16,7 @@ import gov.iti.jets.ecommiti.mappers.OrderHasProductMapper;
 import gov.iti.jets.ecommiti.models.OrderHasProduct;
 import gov.iti.jets.ecommiti.models.OrderHasProductId;
 import gov.iti.jets.ecommiti.repositories.OrderHasProductRepository;
+import gov.iti.jets.ecommiti.services.OrderHasProductService;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,14 +24,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/test/orderhasProduct")
 public class OrderHasProductController {
+
     @Autowired
-    private OrderHasProductRepository orderHasProductRepo;
+    public OrderHasProductService orderHasProductService;
+
+    @GetMapping("/{id}")
+    public List<OrderHasProductDTO> getOrderDetails(@PathVariable int id) {
+        return orderHasProductService.getOrderDetails(id);
+        
+    }
 
     @PostMapping
-    public void getOrderHasProduct(@RequestBody OrderHasProductDTO order) {
-        OrderHasProductId id = new OrderHasProductId(order.getOrderDTO().getId(),order.getProductDTO().getId());
-        order.setId(id);
-        orderHasProductRepo.save(OrderHasProductMapper.INSTANCE.map(order));
+    public OrderHasProductDTO getOrderHasProduct(@RequestBody OrderHasProduct orderHasProduct) {
+       
+        return orderHasProductService.createOrderWithProduct(orderHasProduct);
     }
     
+
 }

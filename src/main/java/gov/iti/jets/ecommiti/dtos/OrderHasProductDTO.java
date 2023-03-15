@@ -7,8 +7,8 @@ import lombok.Data;
 @Data
 public class OrderHasProductDTO {
     OrderHasProductId id;
-    ProductDto productDTO;
-    OrderDTO orderDTO;
-    int quantity; 
-    
+    ProductDto product;
+    OrderDTO order;
+    int quantity;
+
 }
