@@ -55,6 +55,15 @@ public class UserService {
 
     }
 
+    public ResponseViewModel updateBalanceService(int id,User user){
+        ResponseViewModel responseViewModel = new ResponseViewModel();
+        Optional<User> existUser = userRepository.findById(id);
+        User userWithUpdatedBalance = existUser.get();
+        userWithUpdatedBalance.setWalletBalance(user.getWalletBalance());
+        responseViewModel.setData(UserMapper.INSTANCE.map(userRepository.save(userWithUpdatedBalance)));
+        return responseViewModel;
+    }
+
     public ResponseViewModel getuserById(Integer id) {
         ResponseViewModel responseViewModel = new ResponseViewModel();
         responseViewModel.setData(UserMapper.INSTANCE.map(userRepository.findById(id).get())); 
