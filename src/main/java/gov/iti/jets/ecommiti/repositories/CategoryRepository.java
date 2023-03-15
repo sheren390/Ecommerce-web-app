@@ -13,7 +13,8 @@ import jakarta.transaction.Transactional;
 
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
-    Optional<Category> findByName(String name);
+    @Query(value = "SELECT * FROM category WHERE name LIKE %:name% AND id != 1", nativeQuery = true)
+    Optional<List<Category>> findByName(@Param("name") String name);
 
     @Modifying
     @Transactional
