@@ -5,6 +5,8 @@ package gov.iti.jets.ecommiti.models;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,7 +34,7 @@ public class Product implements java.io.Serializable {
     private int quantity;
     private long price;
     private String image;
-    private Boolean isDeleted;
+    private Boolean isDeleted = false;
     private Set<OrderHasProduct> orderHasProducts = new HashSet<OrderHasProduct>(0);
 
     public Product() {
@@ -139,10 +141,10 @@ public class Product implements java.io.Serializable {
         return isDeleted;
     }
 
+    @Column(name = "is_deleted", nullable = false, columnDefinition = "BIT(1)")
     public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
-
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
     public Set<OrderHasProduct> getOrderHasProducts() {

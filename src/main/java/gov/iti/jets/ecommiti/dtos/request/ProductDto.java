@@ -15,5 +15,6 @@ public class ProductDto {
     private String image;
     private CategoryResponseDto category;
     private UserDTO user;
+    private boolean isDeleted;
 
 }

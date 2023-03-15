@@ -1,10 +1,7 @@
 package gov.iti.jets.ecommiti.mappers;
 
 import gov.iti.jets.ecommiti.dtos.request.ProductDto;
-import gov.iti.jets.ecommiti.dtos.response.ProductResponseDTO;
 import gov.iti.jets.ecommiti.models.Product;
-
-import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -19,8 +16,5 @@ public interface ProductMapper {
     ProductDto mapToProductDto(Product product);
     List <Product> mapToProduct(List<ProductDto> productRequestDto);
     List <ProductDto> mapToProductDto(List<Product> product);
-
-    @InheritInverseConfiguration
-    List<ProductResponseDTO> map (List<Product> product);
 
 }
