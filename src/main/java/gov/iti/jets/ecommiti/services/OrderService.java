@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import gov.iti.jets.ecommiti.dtos.OrderDTO;
 import gov.iti.jets.ecommiti.dtos.request.OrderRequestDTO;
+import gov.iti.jets.ecommiti.dtos.response.OrderResponseDTO;
 import gov.iti.jets.ecommiti.exceptions.OrderException;
 import gov.iti.jets.ecommiti.mappers.OrderMapper;
 import gov.iti.jets.ecommiti.models.Order;
@@ -67,6 +68,10 @@ public class OrderService {
 
         order.setOrderStatus("Canceled");
         orderRepository.save(order);
+    }
+
+    public List<OrderResponseDTO> getAllOrdersByUserId(Integer id) {
+        return OrderMapper.INSTANCE.map(orderRepository.findAllOrdersByUserId(id));
     }
 
 
