@@ -42,6 +42,12 @@ public class UserController {
         return updatedUser;
     }
 
+    @PutMapping("updatebalance/{id}")
+    public ResponseViewModel updateBalance(@PathVariable("id") Integer id, @RequestBody User user){
+        ResponseViewModel updatedBalance = userService.updateBalanceService(id,user);
+        return updatedBalance;
+    }
+
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable("id") Integer id) {
         userService.delete(id);
