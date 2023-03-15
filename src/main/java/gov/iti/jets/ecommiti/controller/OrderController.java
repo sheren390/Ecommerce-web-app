@@ -17,6 +17,7 @@ import gov.iti.jets.ecommiti.dtos.request.OrderRequestDTO;
 import gov.iti.jets.ecommiti.dtos.response.OrderResponseDTO;
 import gov.iti.jets.ecommiti.models.Order;
 import gov.iti.jets.ecommiti.services.OrderService;
+import jakarta.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("/api/test/orders")
@@ -28,13 +29,13 @@ public class OrderController {
 
     @GetMapping
     public List<OrderResponseDTO> getAllOrders() {
-        
+
         return orderService.getAllOrders();
     }
-    
+
     @GetMapping("/user/{id}")
     public List<OrderResponseDTO> getAllOrdersByUserId(@PathVariable Integer id) {
-    
+
         return orderService.getAllOrdersByUserId(id);
     }
 
@@ -45,7 +46,7 @@ public class OrderController {
 
     @PutMapping("/{id}")
     public OrderDTO updateOrder(@PathVariable Integer id, @RequestBody OrderRequestDTO updatedOrder) {
-       
+
         return orderService.updateOrder(id, updatedOrder);
     }
 
@@ -59,5 +60,9 @@ public class OrderController {
         orderService.deleteOrder(id);
     }
 
-    
+    @PutMapping("changeStatus/{id}")
+    public void changeOrderSatus(@PathVariable Integer id, @RequestBody String status) {
+        orderService.changeOrderSatus(id, status);
+    }
+
 }

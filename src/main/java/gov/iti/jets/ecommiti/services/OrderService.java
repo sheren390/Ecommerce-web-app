@@ -67,5 +67,12 @@ public class OrderService {
         return OrderMapper.INSTANCE.map(orderRepository.findAllOrdersByUserId(id));
     }
 
+    public void changeOrderSatus(Integer id, String status) {
+        Order order = orderRepository.findById(id)
+                .orElseThrow(() -> new OrderException(HttpStatus.NOT_FOUND, "Order not found with id " + id));
+
+        order.setOrderStatus(status);
+        orderRepository.save(order);
+    }
 
 }
